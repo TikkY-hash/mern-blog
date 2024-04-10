@@ -1,6 +1,6 @@
 import Article from '../models/Article.js';
 import { Request, Response } from 'express';
-import { AuthRequest, SortOptions } from '../types/controllerTypes.js';
+import { AuthRequest } from '../types/controllerTypes.js';
 
 export const createArticle = async (req: AuthRequest, res: Response) => {
   try {

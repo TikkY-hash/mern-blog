@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import cron from 'node-cron';
 import Parser from 'rss-parser';
 import Article from '../models/Article.js';
@@ -28,6 +30,8 @@ const parseAndSaveArticles = async () => {
     console.error('Error parsing and saving articles:', error);
   }
 };
+
+parseAndSaveArticles();
 
 const CRON_SCHEDULE = '0 * * * *';
 cron.schedule(CRON_SCHEDULE, parseAndSaveArticles);
