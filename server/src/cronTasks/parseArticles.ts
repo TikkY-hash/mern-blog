@@ -31,7 +31,5 @@ const parseAndSaveArticles = async () => {
   }
 };
 
-parseAndSaveArticles();
-
 const CRON_SCHEDULE = '0 * * * *';
 cron.schedule(CRON_SCHEDULE, parseAndSaveArticles);

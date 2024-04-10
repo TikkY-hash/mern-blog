@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 import User from '../models/User.js';
 import { Response, Request } from 'express';
-import { AuthRequest } from '../types/controllerTypes.js';
 
 export const loginController = async (req: Request, res: Response) => {
   try {
@@ -55,19 +54,3 @@ export const registerController = async (req: Request, res: Response) => {
   }
 };
 
-export const meController = async (req: AuthRequest, res: Response) => {
-  try {
-    const user = await User.findById(req.userId).lean();
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { passwordHash, ...userData } = user;
-    res.json(userData);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Invalid access' });
-  }
-};

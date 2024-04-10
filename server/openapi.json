@@ -77,32 +77,6 @@
         }
       }
     },
-    "/auth/me": {
-      "get": {
-        "summary": "Get Current User Information",
-        "tags": ["Authentication"],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "User not authorized"
-          }
-        }
-      }
-    },
     "/articles": {
       "post": {
         "summary": "Create an Article",
@@ -136,15 +110,82 @@
       "get": {
         "summary": "Get All Articles",
         "tags": ["Articles"],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by article title (case-insensitive)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of articles per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field to sort articles by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort order for articles (asc or desc)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Articles retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Article"
+                  "type": "object",
+                  "properties": {
+                    "articles": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Article"
+                      }
+                    },
+                    "currentPage": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalArticles": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
                   }
                 }
               }
@@ -167,6 +208,16 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "Increment views count if true",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["true", "false"]
             }
           }
         ],
@@ -275,6 +326,83 @@
           }
         }
       }
+    },
+    "/articles/my": {
+      "get": {
+        "summary": "Get Current User's Articles",
+        "tags": ["Articles"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by article title (case-insensitive)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of articles per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's articles retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "articles": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Article"
+                      }
+                    },
+                    "currentPage": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalArticles": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to get user articles"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -299,6 +427,9 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string"
+          },
+          "user": {
             "type": "string"
           },
           "title": {
