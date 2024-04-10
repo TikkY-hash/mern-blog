@@ -14,5 +14,6 @@ Backend:
 - DATABASE_URL='mongodb+srv:///': Provide the path to the MongoDB database.
 - PASSWORD='': Set your password for the database.
 - JWT_KEY='': Define your JWT key.
+
 3.3. Run yarn dev or npm run dev in the terminal.
 
