@@ -20,7 +20,7 @@ if (!process.env.DATABASE_URL || !process.env.PASSWORD) {
 const PATH = process.env.DATABASE_URL.replace('<password>', process.env.PASSWORD);
 
 const __filename = fileURLToPath(import.meta.url);
-export const __dirname = dirname(__filename);
+const __dirname = dirname(__filename);
 
 const openapiPath = path.join(__dirname, '../openapi.json');
 const rawData = fs.readFileSync(openapiPath, 'utf8');

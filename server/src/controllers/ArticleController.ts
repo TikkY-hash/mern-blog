@@ -44,7 +44,7 @@ export const getArticles = async (req: Request, res: Response) => {
       skipCount = Math.max(0, sortedSkip);
     }
 
-    const sortCriteria: SortOptions = {};
+    const sortCriteria: any = {};
     sortCriteria[sortField] = sortOrder;
 
     const articles = await Article.find(query).sort(sortCriteria).skip(skipCount).limit(limit).populate('user').exec();
@@ -65,11 +65,11 @@ export const getArticles = async (req: Request, res: Response) => {
   }
 };
 
-export const getMyArticles = async (req: Request, res: Response) => {
+export const getMyArticles = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.userId;
 
-    const query = { user: userId };
+    const query : any = { user: userId };
     
     if (req.query.search) {
       query.title = { $regex: req.query.search, $options: 'i' };

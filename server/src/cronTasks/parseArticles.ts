@@ -6,7 +6,7 @@ const parser = new Parser();
 
 const parseAndSaveArticles = async () => {
   try {
-    const feed = await parser.parseURL('https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss');
+    const feed = await parser.parseURL(process.env.PARSE_URL || '');
 
     await Promise.all(
       feed.items.map(async (item) => {
@@ -28,7 +28,6 @@ const parseAndSaveArticles = async () => {
     console.error('Error parsing and saving articles:', error);
   }
 };
-
 
 const CRON_SCHEDULE = '0 * * * *';
 cron.schedule(CRON_SCHEDULE, parseAndSaveArticles);
