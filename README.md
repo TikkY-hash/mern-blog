@@ -3,6 +3,7 @@ How to get started:
 Clone the repository using git clone.
 
 Frontend:
+
 2.1. Navigate to the client folder and run npm install or yarn in the terminal.
 
 2.2. Create a .env file in the core folder. Inside .env, set VITE_API_URL='your_api_url_here', where 'your_api_url_here' is the path to your API.
@@ -10,6 +11,7 @@ Frontend:
 2.3. Run yarn dev or npm run dev in the terminal.
 
 Backend:
+
 3.1. Navigate to the server folder and run npm install or yarn in the terminal.
 
 3.2. Create a .env file in the core folder. Inside .env, set the following variables:
