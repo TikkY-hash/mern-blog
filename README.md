@@ -25,5 +25,5 @@ Backend:
 
 Swagger:
 
-To check APIs, start the server and navigate to 'http://localhost:${your port}/api-docs' + '/api-docs'.
+To check APIs, start the server and navigate to http://localhost:${your port}/api-docs + /api-docs.
 
