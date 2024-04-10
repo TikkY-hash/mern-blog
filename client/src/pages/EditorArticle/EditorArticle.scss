@@ -1,0 +1,28 @@
+.editorArticleRoot {
+    margin-top: 32px;
+}
+
+.editorArticleImage {
+    object-fit: cover;
+}
+
+.editorButtonsWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.eventButton {
+    margin-left: 10px !important;
+}
+
+.placeholderImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; 
+    background-color: #f0f0f0; 
+    color: #666;
+    font-size: 18px; 
+    border: 1px dashed #ccc; 
+  }
