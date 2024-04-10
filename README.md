@@ -23,3 +23,6 @@ Backend:
 
 3.3. Run yarn dev or npm run dev in the terminal.
 
+Swagger:
+To check APIs, start the server and navigate to 'http://localhost:${your port}/api-docs' + '/api-docs'.
+
